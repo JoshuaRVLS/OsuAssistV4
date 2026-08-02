@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "dX9aEEtomwA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Joshua Ravael\\Downloads\\compressed\\OsussistExternal-uc_[unknowncheats.me]_\\OsussistExternal-uc\\tests\\SliderPathEvaluator.Tests.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Joshua Ravael\\.nuget\\packages\\osuparsers\\1.7.2\\osuparsers.1.7.2.nupkg.sha512",
+    "C:\\Users\\Joshua Ravael\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

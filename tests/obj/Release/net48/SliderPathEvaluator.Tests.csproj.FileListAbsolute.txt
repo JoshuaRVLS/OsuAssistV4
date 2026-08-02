@@ -1,0 +1,15 @@
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.csproj.AssemblyReference.cache
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.csproj.SuggestedBindingRedirects.cache
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.exe.config
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.AssemblyInfoInputs.cache
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.AssemblyInfo.cs
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\bin\Release\net48\SliderPathEvaluator.Tests.exe.config
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\bin\Release\net48\SliderPathEvaluator.Tests.exe
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\bin\Release\net48\SliderPathEvaluator.Tests.pdb
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\bin\Release\net48\OsuParsers.dll
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\bin\Release\net48\System.Numerics.Vectors.dll
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPa.792EAC00.Up2Date
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.exe
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.pdb
