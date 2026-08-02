@@ -8,6 +8,10 @@ namespace Osussist.src.config
 {
 	public class Config
 	{
+		public const string LegitProfileFile = "legit.json";
+		public const string RageProfileFile = "rage.json";
+		private const string ActiveProfileFile = "active-profile.txt";
+
 		private Logger logger = Logger.LoggingInstance;
 		public static string currentConfigFile { get; set; }
 		public static Config configInstance { get; set; }
@@ -23,18 +27,52 @@ namespace Osussist.src.config
 			configInstance = this;
 		}
 
+		public bool LoadActiveProfile()
+		{
+			EnsureProfiles();
+			string profile = ReadActiveProfile();
+			return LoadProfile(profile);
+		}
+
+		public bool LoadProfile(string fileName)
+		{
+			if (!IsManagedProfile(fileName))
+				return false;
+
+			EnsureProfiles();
+			if (IsManagedProfile(currentConfigFile)
+				&& !string.Equals(currentConfigFile, fileName, StringComparison.OrdinalIgnoreCase))
+			{
+				Save(currentConfigFile);
+			}
+			if (!Load(fileName))
+				return false;
+
+			config.aimbotsettings.algorithm = MouseAlgorithms.Linear;
+			WriteActiveProfile(fileName);
+			return true;
+		}
+
+		public bool SaveCurrent()
+		{
+			string fileName = IsManagedProfile(currentConfigFile) ? currentConfigFile : ReadActiveProfile();
+			return Save(fileName);
+		}
+
 		public bool Load(string fileName)
 		{
 			string filePath = Path.Combine(configFolder, fileName);
 
-			if (File.Exists(filePath) || Path.GetExtension(filePath).ToLower() != ".json")
+			if (File.Exists(filePath) && Path.GetExtension(filePath).ToLower() == ".json")
 			{
 				try
 				{
 					string json = File.ReadAllText(filePath);
-					config = JsonConvert.DeserializeObject<ConfigObject>(json);
+					config = JsonConvert.DeserializeObject<ConfigObject>(json) ?? new ConfigObject();
 					logger.Info("Utils.Config", "Config file loaded successfully.");
 					currentConfigFile = fileName;
+					if (IsManagedProfile(fileName))
+						WriteActiveProfile(fileName);
 					return true;
 				}
 				catch (Exception e)
@@ -96,6 +134,7 @@ namespace Osussist.src.config
 
 				char[] json = JsonConvert.SerializeObject(config, Formatting.Indented).ToCharArray();
 				File.WriteAllBytes(filePath, Encoding.UTF8.GetBytes(json));
+				currentConfigFile = fileName;
 				logger.Info("Utils.Config", "Config file saved successfully.");
 				return true;
 			}
@@ -138,6 +177,84 @@ namespace Osussist.src.config
 			}
 
 			return configFiles;
+		}
+
+		private void EnsureProfiles()
+		{
+			EnsureProfile(LegitProfileFile, CreateLegitProfile());
+			EnsureProfile(RageProfileFile, CreateRageProfile());
+		}
+
+		private void EnsureProfile(string fileName, ConfigObject profile)
+		{
+			string filePath = Path.Combine(configFolder, fileName);
+			if (File.Exists(filePath))
+				return;
+
+			char[] json = JsonConvert.SerializeObject(profile, Formatting.Indented).ToCharArray();
+			File.WriteAllBytes(filePath, Encoding.UTF8.GetBytes(json));
+		}
+
+		private string ReadActiveProfile()
+		{
+			try
+			{
+				string activeProfilePath = Path.Combine(configFolder, ActiveProfileFile);
+				if (File.Exists(activeProfilePath))
+				{
+					string profile = File.ReadAllText(activeProfilePath).Trim();
+					if (IsManagedProfile(profile))
+						return profile;
+				}
+			}
+			catch (Exception e)
+			{
+				logger.Error("Utils.Config", $"Failed to read active profile: {e.Message}");
+			}
+
+			return LegitProfileFile;
+		}
+
+		private void WriteActiveProfile(string fileName)
+		{
+			try
+			{
+				File.WriteAllText(Path.Combine(configFolder, ActiveProfileFile), fileName, Encoding.UTF8);
+			}
+			catch (Exception e)
+			{
+				logger.Error("Utils.Config", $"Failed to save active profile: {e.Message}");
+			}
+		}
+
+		private static bool IsManagedProfile(string fileName)
+		{
+			return string.Equals(fileName, LegitProfileFile, StringComparison.OrdinalIgnoreCase)
+				|| string.Equals(fileName, RageProfileFile, StringComparison.OrdinalIgnoreCase);
+		}
+
+		private static ConfigObject CreateLegitProfile()
+		{
+			var profile = new ConfigObject();
+			profile.aimbotenabled = true;
+			profile.aimbotsettings.fovsize = 300;
+			profile.aimbotsettings.strength = 0.57f;
+			profile.aimbotsettings.algorithm = MouseAlgorithms.Linear;
+			profile.relaxenabled = true;
+			profile.relaxsettings.hardrockenabled = false;
+			return profile;
+		}
+
+		private static ConfigObject CreateRageProfile()
+		{
+			var profile = new ConfigObject();
+			profile.aimbotenabled = true;
+			profile.aimbotsettings.fovsize = 1000;
+			profile.aimbotsettings.strength = 0.8042f;
+			profile.aimbotsettings.algorithm = MouseAlgorithms.Linear;
+			profile.relaxenabled = true;
+			profile.relaxsettings.hardrockenabled = false;
+			return profile;
 		}
 	}
 	public class ConfigObject
@@ -196,7 +313,7 @@ namespace Osussist.src.config
 		public int hitobjectradius { get; set; } = 50;
 		public int pullawaydistance { get; set; } = 200;
 		public bool hardrockenabled { get; set; } = false;
-		public MouseAlgorithms algorithm { get; set; } = MouseAlgorithms.Steps;
+		public MouseAlgorithms algorithm { get; set; } = MouseAlgorithms.Linear;
 		public RgbColor cursorcolor { get; set; } = new RgbColor(221, 50, 50);
 		public RgbColor targetcolor { get; set; } = new RgbColor(255, 0, 220);
 		public VarianceInt movementdelay { get; set; } = new VarianceInt(1, 5);

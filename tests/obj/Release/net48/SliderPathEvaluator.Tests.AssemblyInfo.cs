@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SliderPathEvaluator.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f25419d8ad26cf37aa43d457810b08ca5983bbf8")]
 [assembly: System.Reflection.AssemblyProductAttribute("SliderPathEvaluator.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SliderPathEvaluator.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -61,9 +61,8 @@ namespace Osussist
                     ShowWindow(consoleHandle, SW_HIDE);
                 }
 
-                Config config = new Config();
-                if (!config.Load("config.json"))
-                    config.Save("config.json");
+				Config config = new Config();
+				config.LoadActiveProfile();
 
                 Thread guiThread = new Thread(new ThreadStart(RenderGUI));
                 guiThread.SetApartmentState(ApartmentState.STA);
@@ -79,10 +78,11 @@ namespace Osussist
 
                 OsuMonitor monitor = new OsuMonitor();
                 monitor.StartMonitoring();
-                AppDomain.CurrentDomain.ProcessExit += (s, e) =>
-                {
-                    monitor.StopMonitoring();
-                };
+				AppDomain.CurrentDomain.ProcessExit += (s, e) =>
+				{
+					Config.configInstance.SaveCurrent();
+					monitor.StopMonitoring();
+				};
                 logger.Info("Main", "Monitoring has been initialized successfully");
 
                 MainLoop(SDK, aimbot, relax);

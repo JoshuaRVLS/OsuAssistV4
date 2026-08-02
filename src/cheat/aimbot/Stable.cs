@@ -371,29 +371,7 @@ namespace Osussist.src.cheat.aimbot
 
         private void PerformMove(Vector2 hitObject)
         {
-            switch (Config.config.aimbotsettings.algorithm)
-            {
-                case MouseAlgorithms.Steps:
-                    Mouse.MoveAlgorithmSteps(hitObject);
-                    for (int i = 1; i <= 3 && ClosestHitObjectIndex == SongIndex; i++)
-                        Thread.Sleep(1);
-                    break;
-                case MouseAlgorithms.Bezier:
-                    Mouse.MoveAlgorithmBezier(hitObject);
-                    for (int i = 1; i <= 3 && ClosestHitObjectIndex == SongIndex; i++)
-                        Thread.Sleep(1);
-                    break;
-                case MouseAlgorithms.Linear:
-                    Mouse.MoveAlgorithmLinear(hitObject);
-                    break;
-                case MouseAlgorithms.Flick:
-                    Mouse.MoveAlgorithmFlick(hitObject);
-                    break;
-                default:
-                    logger.Warning("Aimbot.Stable", "Invalid mouse algorithm, defaulting to steps.");
-                    Mouse.MoveAlgorithmSteps(hitObject);
-                    break;
-            }
+            Mouse.MoveLinear(hitObject);
         }
     }
 }

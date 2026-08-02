@@ -27,7 +27,6 @@ namespace Osussist.src.cheat
         public static Beatmap CurrentBeatmap { get; private set; }
         private PlayStyles PlayStyle;
         private int HitWin50;
-        private int HitWin100;
         private int HitWin300;
 
         private float HitScanMultiplier;
@@ -104,7 +103,6 @@ namespace Osussist.src.cheat
 
                     PlayStyle = Config.config.relaxsettings.playstyle;
                     HitWin50 = SDK.HitWindow50(CurrentBeatmap.DifficultySection.OverallDifficulty);
-                    HitWin100 = SDK.HitWindow100(CurrentBeatmap.DifficultySection.OverallDifficulty);
                     HitWin300 = SDK.HitWindow300(CurrentBeatmap.DifficultySection.OverallDifficulty);
                     HitScanMultiplier = Config.config.relaxsettings.hitscanmultiplier;
                     HitScanMaxDistance = Config.config.relaxsettings.hitscanmaxdistance;
@@ -363,21 +361,7 @@ namespace Osussist.src.cheat
 
         private ValueTuple<int, int> RandomizeHitObjectTimings(int index)
         {
-            float timingAdjustmentFactor = random.NextFloat(1.0f, 1.2f);
-            int timingOffset;
-            if (Logic.isHitKeyPressed)
-            {
-                timingOffset = random.Next(-HitWin100 / 2, HitWin100 / 3 + 1);
-            }
-            else
-            {
-                int range = HitWin300 / (int)timingAdjustmentFactor;
-                timingOffset = random.Next(-range, range + 1) - (range / 4);
-                if (random.Next(0, 100) < 50)
-                {
-                    timingOffset -= random.Next(0, range / 2);
-                }
-            }
+            int timingOffset = RelaxTiming.NextCenteredHitOffset(random, HitWin300);
             int timingValue = random.Next(HitWin300, HitWin300 * 2);
             int additionalTiming;
             if (CurrentBeatmap.HitObjects[index] is HitCircle)

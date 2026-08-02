@@ -423,7 +423,7 @@ namespace Osussist.src.gui
             this.CreditsTitle.Name = "CreditsTitle";
             this.CreditsTitle.Size = new System.Drawing.Size(115, 21);
             this.CreditsTitle.TabIndex = 0;
-            this.CreditsTitle.Text = "Made by Takkeshi";
+            this.CreditsTitle.Text = "Made by JoshuaRVL";
             // 
             // SidepanelButtons
             // 
@@ -599,7 +599,7 @@ namespace Osussist.src.gui
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(224, 20);
             this.SubtitleLabel.TabIndex = 1;
-            this.SubtitleLabel.Text = "We did not have relations with that RAM";
+            this.SubtitleLabel.Text = "JoshuaRVL build";
             this.SubtitleLabel.TextAlignment = System.Drawing.ContentAlignment.TopCenter;
             // 
             // TitleLabel
@@ -612,7 +612,7 @@ namespace Osussist.src.gui
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(118, 32);
             this.TitleLabel.TabIndex = 0;
-            this.TitleLabel.Text = "氧 Osussist";
+            this.TitleLabel.Text = "JoshuaRVL";
             this.TitleLabel.TextAlignment = System.Drawing.ContentAlignment.TopCenter;
             // 
             // DragZone1
@@ -2348,7 +2348,7 @@ namespace Osussist.src.gui
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainGUI";
-            this.Text = "Osussist v3 | By: Takkeshi";
+            this.Text = "JoshuaRVL";
             this.Load += new System.EventHandler(this.MainGUI_Load);
             this.Sidepanel.ResumeLayout(false);
             this.Sidepanel.PerformLayout();

@@ -87,25 +87,7 @@ namespace Osussist.src.cheat.aimbot
 
 		private void PerformMove(Vector2 hitObject)
 		{
-			switch (Config.config.aimbotsettings.algorithm)
-			{
-				case MouseAlgorithms.Steps:
-					Mouse.MoveAlgorithmSteps(hitObject);
-					break;
-				case MouseAlgorithms.Bezier:
-					Mouse.MoveAlgorithmBezier(hitObject);
-					break;
-				case MouseAlgorithms.Linear:
-					Mouse.MoveAlgorithmLinear(hitObject);
-					break;
-				case MouseAlgorithms.Flick:
-					Mouse.MoveAlgorithmFlick(hitObject);
-					break;
-				default:
-					logger.Warning("Aimbot.Stable", "Invalid mouse algorithm, defaulting to steps.");
-					Mouse.MoveAlgorithmSteps(hitObject);
-					break;
-			}
+			Mouse.MoveLinear(hitObject);
 		}
 
 		private static Bitmap CaptureScreen()

@@ -10,9 +10,19 @@
     <Compile Include="..\src\cheat\aimbot\SliderPathEvaluator.cs" Link="SliderPathEvaluator.cs" />
     <Compile Include="..\src\cheat\aimbot\SliderCursorTracker.cs" Link="SliderCursorTracker.cs" />
     <Compile Include="..\src\cheat\aimbot\SpinnerPath.cs" Link="SpinnerPath.cs" />
+    <Compile Include="..\src\cheat\aimbot\LinearMovement.cs" Link="LinearMovement.cs" />
+    <Compile Include="..\src\cheat\RelaxTiming.cs" Link="RelaxTiming.cs" />
+    <Compile Include="..\src\config\Config.cs" Link="Config.cs" />
+    <Compile Include="..\src\config\objects\MouseAlgorithms.cs" Link="MouseAlgorithms.cs" />
+    <Compile Include="..\src\config\objects\PlayStyles.cs" Link="PlayStyles.cs" />
+    <Compile Include="..\src\config\objects\RgbColor.cs" Link="RgbColor.cs" />
+    <Compile Include="..\src\config\objects\Variance.cs" Link="Variance.cs" />
+    <Compile Include="..\src\utils\Logger.cs" Link="Logger.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="OsuParsers" Version="1.7.2" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="InputSimulator" Version="1.0.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>

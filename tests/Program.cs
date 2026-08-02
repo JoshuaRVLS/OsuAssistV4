@@ -1,6 +1,9 @@
 using OsuParsers.Beatmaps.Objects;
 using OsuParsers.Enums.Beatmaps;
+using Osussist.src.cheat;
 using Osussist.src.cheat.aimbot;
+using Osussist.src.config;
+using Osussist.src.utils;
 using System.Numerics;
 
 namespace Osussist.Tests
@@ -19,6 +22,9 @@ namespace Osussist.Tests
             CatmullPathTraversesSpline();
             VirtualCursorUsesSentPosition();
             SpinnerPathUsesPlaybackTime();
+            CenteredTimingStaysInside300Window();
+            LinearMovementScalesSignedDelta();
+            ProfilesPersistSelectedConfig();
         }
 
         private static void LinearPathUsesSliderLength()
@@ -110,6 +116,64 @@ namespace Osussist.Tests
             Vector2 quarterTurn = SpinnerPath.PositionAt(center, radius, 1000, 1031);
             AssertTrue(quarterTurn.Y > center.Y && quarterTurn.X > center.X, "Spinner path did not advance clockwise from its start point.");
             AssertNear(new Vector2(352f, 192f), SpinnerPath.PositionAt(center, radius, 1000, 1125));
+        }
+
+        private static void CenteredTimingStaysInside300Window()
+        {
+            foreach (int hitWindow300 in new[] { 20, 32, 50 })
+            {
+                var random = new Random(hitWindow300);
+                int maximumJitter = Math.Max(1, hitWindow300 / 4);
+                for (int i = 0; i < 1000; i++)
+                {
+                    int offset = RelaxTiming.NextCenteredHitOffset(random, hitWindow300);
+                    AssertTrue(Math.Abs(offset) <= maximumJitter, "Timing offset exceeded the configured jitter bound.");
+                    AssertTrue(Math.Abs(offset) < hitWindow300, "Timing offset fell outside the 300 window.");
+                }
+            }
+        }
+
+        private static void LinearMovementScalesSignedDelta()
+        {
+            AssertNear(new Vector2(40f, -20f), LinearMovement.CalculateDelta(Vector2.Zero, new Vector2(100f, -50f), 0.4f));
+            AssertNear(new Vector2(-25f, -25f), LinearMovement.CalculateDelta(new Vector2(50f, 50f), Vector2.Zero, 0.5f));
+            AssertNear(new Vector2(100f, -50f), LinearMovement.CalculateDelta(Vector2.Zero, new Vector2(100f, -50f), 2f));
+        }
+
+        private static void ProfilesPersistSelectedConfig()
+        {
+            string originalConfigFolder = Config.configFolder;
+            string testConfigFolder = Path.Combine(Path.GetTempPath(), "JoshuaRvlProfileTests", Guid.NewGuid().ToString("N"));
+
+            try
+            {
+                if (Logger.LoggingInstance == null)
+                    new Logger(false, string.Empty, (int)LogLevels.DISABLED);
+
+                Config.configFolder = testConfigFolder;
+                var profiles = new Config();
+                AssertTrue(profiles.LoadActiveProfile(), "Legit profile did not load.");
+                AssertTrue(Config.currentConfigFile == Config.LegitProfileFile, "Legit profile was not selected by default.");
+                AssertTrue(Config.config.aimbotsettings.fovsize == 300, "Legit FOV did not match the preset.");
+                AssertTrue(Math.Abs(Config.config.aimbotsettings.strength - 0.57f) < 0.001f, "Legit strength did not match the preset.");
+
+                Config.config.aimbotsettings.strength = 0.61f;
+                AssertTrue(profiles.LoadProfile(Config.RageProfileFile), "Rage profile did not load.");
+                AssertTrue(profiles.LoadProfile(Config.LegitProfileFile), "Legit profile did not reload.");
+                AssertTrue(Math.Abs(Config.config.aimbotsettings.strength - 0.61f) < 0.001f, "Profile changes were lost when switching.");
+
+                AssertTrue(profiles.LoadProfile(Config.RageProfileFile), "Rage profile did not reload.");
+                AssertTrue(profiles.SaveCurrent(), "Current profile did not save.");
+                var restartedProfiles = new Config();
+                AssertTrue(restartedProfiles.LoadActiveProfile(), "Last selected profile did not restore.");
+                AssertTrue(Config.currentConfigFile == Config.RageProfileFile, "Rage profile was not restored after restart.");
+            }
+            finally
+            {
+                Config.configFolder = originalConfigFolder;
+                if (Directory.Exists(testConfigFolder))
+                    Directory.Delete(testConfigFolder, true);
+            }
         }
 
         private static Slider CreateSlider(CurveType curveType, Vector2 firstPoint, int repeats = 1, double pixelLength = 100d)

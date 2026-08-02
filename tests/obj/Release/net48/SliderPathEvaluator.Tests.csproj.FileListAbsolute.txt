@@ -13,3 +13,6 @@ C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.m
 C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPa.792EAC00.Up2Date
 C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.exe
 C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.pdb
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\obj\Release\net48\SliderPathEvaluator.Tests.sourcelink.json
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\bin\Release\net48\WindowsInput.dll
+C:\Users\Joshua Ravael\Downloads\compressed\OsussistExternal-uc_[unknowncheats.me]_\OsussistExternal-uc\tests\bin\Release\net48\Newtonsoft.Json.dll

@@ -21,7 +21,7 @@
           "net48"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
         },
         "frameworks": {
           "net48": {
@@ -47,6 +47,14 @@
           "framework": "net48",
           "targetAlias": "net48",
           "dependencies": {
+            "InputSimulator": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "OsuParsers": {
               "target": "Package",
               "version": "[1.7.2, )"
